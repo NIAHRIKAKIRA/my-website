@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday — Hearts & Kisses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --text-pink:#e0d0d8;  
+    }
+    *{box-sizing:border-box;}
+    html,body{
+      margin:0;
+      height:100%;
+    }
+
+    body{
+      background: url("https://i.postimg.cc/ydHYhnbL/Moon.jpg") no-repeat center center;
+      background-size: cover;
+      font-family:'DM Sans', sans-serif;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      flex-direction: column;
+    }
+
+    .headline{
+      position:relative;
+      z-index:2;
+      text-align:center;
+    }
+    
+    .happy, .birthday, .my{
+      font-family:'Cinzel', serif;
+      font-weight:700;
+      font-size:40px;
+      letter-spacing:2px;
+      color:var(--text-pink);  
+      margin: 10px 0;
+      min-height: 50px;
+    }
+
+    .next-btn{
+      margin-top:30px;
+      padding:15px 25px;
+      background:#c789a3;
+      border:none;
+      border-radius:12px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+      transition:background 0.3s;
+      z-index:3;
+      opacity: 0; /* hidden until text finished */
+      pointer-events: none;
+    }
+    .next-btn:hover{background:#b590a1;}
+  </style>
+</head>
+<body>
+
+  <!-- Headline -->
+  <div class="headline">
+    <div class="happy"></div>
+    <div class="birthday"></div>
+    <div class="my"></div>
+  </div>
+
+  <!-- Button -->
+  <button class="next-btn" onclick="window.location.href='letter.html'">Letter for you 💌</button>
+
+  <script>
+    const lines = [
+      "💖 HAPPIESTTT 💖",
+      "🎂 BIRTHDAYYYY 🎂",
+      "🌙 MY HANDSOME 🌙"
+    ];
+    
+    const containers = document.querySelectorAll(".headline div");
+    const button = document.querySelector(".next-btn");
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < lines.length) {
+        let currentLine = lines[lineIndex];
+        if (charIndex < currentLine.length) {
+          containers[lineIndex].textContent += currentLine.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeLine, 100); // speed of typing
+        } else {
+          lineIndex++;
+          charIndex = 0;
+          setTimeout(typeLine, 600); // pause before next line
+        }
+      } else {
+        // show button after all lines
+        button.style.opacity = "1";
+        button.style.pointerEvents = "auto";
+      }
+    }
+
+    window.onload = () => {
+      typeLine();
+    };
+  </script>
+</body>
+</html>
